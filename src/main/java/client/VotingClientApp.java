@@ -7,22 +7,22 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class VotingClientApp extends Application {
-    
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/voting-client.fxml"));
         Parent root = loader.load();
-        
-        primaryStage.setTitle("Distributed Voting System");
-        primaryStage.setScene(new Scene(root, 800, 600));
-        primaryStage.setMinWidth(600);
-        primaryStage.setMinHeight(500);
+
+        primaryStage.setTitle("Distributed Voting System - Multiple Votes Allowed");
+        primaryStage.setScene(new Scene(root, 900, 700));
+        primaryStage.setMinWidth(800);
+        primaryStage.setMinHeight(600);
         primaryStage.show();
-        
+
         // Handle application close
         primaryStage.setOnCloseRequest(event -> {
             ClientController controller = loader.getController();
-            // Add any cleanup logic here
+            controller.handleDisconnect();
         });
     }
 

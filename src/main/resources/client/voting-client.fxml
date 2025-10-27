@@ -5,11 +5,13 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ScrollPane?>
 
 <BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="client.ClientController" stylesheets="/style.css">
@@ -20,33 +22,58 @@
                 <Label text="Username:" style="-fx-text-fill: white;" />
                 <TextField fx:id="usernameField" promptText="Enter your username" />
                 <Button fx:id="connectButton" text="Connect" onAction="#handleConnect" />
+                <Button fx:id="disconnectButton" text="Disconnect" onAction="#handleDisconnect" disable="true" />
                 <Label fx:id="statusLabel" text="Disconnected" style="-fx-text-fill: #e74c3c;" />
             </HBox>
         </VBox>
     </top>
 
     <center>
-        <VBox spacing="20" style="-fx-padding: 20;">
-            <Label text="Cast Your Vote:" style="-fx-font-size: 18; -fx-font-weight: bold;" />
+        <HBox spacing="20" style="-fx-padding: 20;">
+            <VBox spacing="20" prefWidth="300">
+                <Label text="Cast Your Vote:" style="-fx-font-size: 18; -fx-font-weight: bold;" />
 
-            <VBox spacing="10">
-                <RadioButton fx:id="optionA" text="Option A" toggleGroup="$voteGroup" />
-                <RadioButton fx:id="optionB" text="Option B" toggleGroup="$voteGroup" />
-                <RadioButton fx:id="optionC" text="Option C" toggleGroup="$voteGroup" />
+                <VBox spacing="10">
+                    <Label text="Select your preferred option:" style="-fx-font-size: 14;" />
+                    <RadioButton fx:id="optionA" text="Option A" toggleGroup="$voteGroup" />
+                    <RadioButton fx:id="optionB" text="Option B" toggleGroup="$voteGroup" />
+                    <RadioButton fx:id="optionC" text="Option C" toggleGroup="$voteGroup" />
+                </VBox>
+
+                <VBox spacing="10">
+                    <Button fx:id="voteButton" text="Submit Vote" onAction="#handleVote" disable="true"
+                            style="-fx-font-size: 14; -fx-padding: 10 20;" />
+                    <Button fx:id="changeVoteButton" text="Change Vote" onAction="#handleChangeVote" disable="true"
+                            style="-fx-font-size: 14; -fx-padding: 10 20; -fx-background-color: #f39c12;" />
+                </VBox>
+
+                <VBox spacing="10">
+                    <Label text="My Vote Status:" style="-fx-font-weight: bold;" />
+                    <Label fx:id="myVoteLabel" text="Not voted yet" style="-fx-font-size: 14; -fx-text-fill: #2c3e50;" />
+                </VBox>
             </VBox>
 
-            <Button fx:id="voteButton" text="Submit Vote" onAction="#handleVote" disable="true"
-                    style="-fx-font-size: 14; -fx-padding: 10 20;" />
-
-            <PieChart fx:id="voteChart" title="Live Vote Results" legendVisible="true"
-                      style="-fx-background-color: #ecf0f1; -fx-border-color: #bdc3c7; -fx-border-width: 1;" />
-        </VBox>
+            <VBox spacing="20" HBox.hgrow="ALWAYS">
+                <PieChart fx:id="voteChart" title="Live Vote Results" legendVisible="true"
+                          style="-fx-background-color: #ecf0f1; -fx-border-color: #bdc3c7; -fx-border-width: 1;" />
+            </VBox>
+        </HBox>
     </center>
 
     <bottom>
-        <HBox spacing="10" style="-fx-background-color: #34495e; -fx-padding: 10;" alignment="CENTER">
-            <Label fx:id="totalVotesLabel" text="Total Votes: 0" style="-fx-text-fill: white;" />
-            <Label fx:id="connectionLabel" text="Not connected" style="-fx-text-fill: #e74c3c;" />
-        </HBox>
+        <VBox spacing="10" style="-fx-background-color: #34495e; -fx-padding: 15;">
+            <HBox spacing="20" alignment="CENTER">
+                <Label fx:id="totalVotesLabel" text="Total Votes: 0" style="-fx-text-fill: white;" />
+                <Label fx:id="connectionLabel" text="Not connected" style="-fx-text-fill: #e74c3c;" />
+            </HBox>
+
+            <VBox spacing="5">
+                <Label text="Voting Activity:" style="-fx-text-fill: white; -fx-font-weight: bold;" />
+                <ScrollPane fitToWidth="true" maxHeight="120" style="-fx-background-color: transparent;">
+                    <TextArea fx:id="historyTextArea" editable="false" wrapText="true"
+                              style="-fx-control-inner-background: #2c3e50; -fx-text-fill: white; -fx-border-color: #7f8c8d;" />
+                </ScrollPane>
+            </VBox>
+        </VBox>
     </bottom>
 </BorderPane>
