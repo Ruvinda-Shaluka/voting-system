@@ -9,7 +9,6 @@ public class VoteResult {
         this.count = count;
     }
 
-    // Getters and setters
     public String getOption() { return option; }
     public void setOption(String option) { this.option = option; }
     public int getCount() { return count; }
