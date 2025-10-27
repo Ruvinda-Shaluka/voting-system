@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="client.ClientController" stylesheets="/style.css">
+    <top>
+        <VBox spacing="10" style="-fx-background-color: #2c3e50; -fx-padding: 15;">
+            <Label text="Distributed Voting System" style="-fx-text-fill: white; -fx-font-size: 24; -fx-font-weight: bold;" />
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Username:" style="-fx-text-fill: white;" />
+                <TextField fx:id="usernameField" promptText="Enter your username" />
+                <Button fx:id="connectButton" text="Connect" onAction="#handleConnect" />
+                <Label fx:id="statusLabel" text="Disconnected" style="-fx-text-fill: #e74c3c;" />
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="20" style="-fx-padding: 20;">
+            <Label text="Cast Your Vote:" style="-fx-font-size: 18; -fx-font-weight: bold;" />
+
+            <VBox spacing="10">
+                <RadioButton fx:id="optionA" text="Option A" toggleGroup="$voteGroup" />
+                <RadioButton fx:id="optionB" text="Option B" toggleGroup="$voteGroup" />
+                <RadioButton fx:id="optionC" text="Option C" toggleGroup="$voteGroup" />
+            </VBox>
+
+            <Button fx:id="voteButton" text="Submit Vote" onAction="#handleVote" disable="true"
+                    style="-fx-font-size: 14; -fx-padding: 10 20;" />
+
+            <PieChart fx:id="voteChart" title="Live Vote Results" legendVisible="true"
+                      style="-fx-background-color: #ecf0f1; -fx-border-color: #bdc3c7; -fx-border-width: 1;" />
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox spacing="10" style="-fx-background-color: #34495e; -fx-padding: 10;" alignment="CENTER">
+            <Label fx:id="totalVotesLabel" text="Total Votes: 0" style="-fx-text-fill: white;" />
+            <Label fx:id="connectionLabel" text="Not connected" style="-fx-text-fill: #e74c3c;" />
+        </HBox>
+    </bottom>
+</BorderPane>
